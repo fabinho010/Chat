@@ -1,0 +1,311 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: Arial, Helvetica, sans-serif;
+}
+
+body{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    background: url('../assets/anispy.jpg') no-repeat;
+    /*Ajusta la imagen al tamaño real*/
+    background-size: cover;
+    /*Sin esto la otra imagen queda mejor*/
+    background-position: center;
+}
+    
+header{
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    padding: 20px 100px;
+    /*Nav y el h2 se pone uno al lado del otro. No debajo*/
+    display: flex;
+    /*Espacio entro los elementos(Nav y h2)*/
+    justify-content: space-between;
+    /* Alinea los elementos*/
+    align-items: center;
+    z-index: 99;
+}
+
+.logo{
+    font-size: 2em;
+    color: plum;
+    user-select: none;
+}
+
+.navigation a {
+    position:relative;
+    font-size: 1.1em;
+    color: #fff;
+    text-decoration: none;
+    font-weight: 500;
+    margin-left: 40px;
+}
+/*Boto de Login*/
+.navigation .btnLogin-popup{
+
+    /*Anchura del boton*/
+    width: 130px;
+    /*Altura del boton*/
+    height: 50px;
+    /* Fondo transparente*/
+    background: transparent;
+    backdrop-filter: blur(10px);
+     border: 2px solid #fff;
+     outline: none;
+     border-radius: 6px;
+     cursor: pointer;
+     font-size: 1.1em;
+     color: #fff;
+     font-weight: 500;
+     margin-left: 40px;
+     /**/
+     transition: .5s;
+}
+
+/* Despues de que estemos encima de los links  con el raton */
+/* Son las lineas para saber en que opcion del menu estamos.Lo que reselta*/
+.navigation a::after{
+    /*No hay contenido ninguno,es una linea que se va a desplegar*/
+    content: '';
+    position: absolute;
+    /*Para que se alinea con las opciones del menu*/
+    left: 0;
+    bottom: -6px;
+    /**/
+    width: 100%;
+    height: 3px;
+    background: #fff;
+    border-radius: 5px;
+    /*Inicio del mpovimiento*/
+    transform-origin: right;
+    transform: scale(0);
+    transition: transform .5s;
+}
+
+/*Finalizador del movimiento cuando el raton este encima de la ooción*/
+.navigation a:hover::after{
+    transform-origin: left;
+    transform: scale(1);
+}
+
+/* Cuando el raton este encima del boton de login reacción*/
+.navigation .btnLogin-popup:hover{
+    background: #fff;
+    color: #162938;
+
+}
+
+/*Contenido del body*/
+/*Formularios*/
+
+/*Contenedor del formulario*/
+.wrapper{
+    position: relative;
+    width: 400px;
+    height: 440px;
+    background: transparent;
+    border: 2px solid rgb(255,255,255,.5);
+    border-radius: 20px;
+    /*Filtro para que se vea el contenido del formulario*/
+    backdrop-filter: blur(20px);
+    box-shadow: 0 0 30px rgb(0,0,0,.5);
+    display: flex;
+    /*Centra el contenido del contenedor*/
+    justify-content: center;
+    /* */
+    align-items: center;
+    /*Para los elementos que sobresalen tengan un limite como por ejemplo el icono para cerrar*/
+    /*Tambien me sirve para ocultar o el contenido de login o el de registration*/
+    overflow: hidden;
+    transform: scale(0);
+    /*El tamaño para el contenedor para loguearse y registrarse no es lo mismo*/
+    transition: transform .5s ease , height .2s ease;
+}
+
+.wrapper.active-popup {
+    /*Muestro el contenedor*/
+    transform: scale(1);
+}
+
+/*El tamaño para el contenedor para loguearse y registrarse no es lo mismo*/
+.wrapper.active{
+    height: 580px;
+
+}
+/*Bloque contenido del contenedor*/
+.wrapper .form-box {
+    width: 100%;
+    padding: 40px;
+}
+/*Movimiento del contenido de login cuando se activa*/
+.wrapper .form-box.login{
+    transition: transform .18s ease;
+    transform: translateX(0);
+}
+
+/*Mueve el contenido del login para que el contenedor quede vacio para que entre el contenido de registartion*/
+.wrapper.active .form-box.login{
+    transition: none;
+    transform: translateX(-400px);
+}
+
+.wrapper .form-box.register{
+    position: absolute;
+    transition: none;
+    transform: translateX(400px);
+}
+
+.wrapper.active .form-box.register{
+    transition: transform .18s ease;
+    transform: translateX(0);
+}
+
+/*Icono para cerrar*/
+.wrapper .icon-close {
+    position: absolute;
+    top: 0;
+    right: 0;
+    width: 45px;
+    height: 45px;
+    background: #162938;
+    font-size: 2em;
+    color: #CCFFFF;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-bottom-left-radius: 20px;
+    cursor: pointer;
+    z-index: 1;
+
+}
+
+/*Titulo del contenido*/
+.form-box h2 {
+    font-size: 2em;
+    color: #CCFFFF;
+    text-align: center;
+
+}
+/*Diseño inputs*/
+.input-box{
+    position: relative;
+    width: 100%;
+    height: 50px;
+    /*Lineas que separan los inputs*/
+    border-bottom: 2px solid #CCFFFF;
+    margin: 30px 0;
+}
+/*LoS mensajes que vienen con los inputs*/
+.input-box label{
+    position: absolute;
+    top: 50%;
+    left: 5px;
+    transform: translateY(-50%);
+    font-size: 1em;
+    color: #CCFFFF;
+    font-weight: 500;
+    pointer-events: none;
+    /*Movimineto ante cualquier transicion o modificación que se haga*/
+    transition: .5s;
+}
+
+/*Condiciones.Si estoy sobre los inputs el label va hacia arriba*/
+.input-box input:focus~label,
+.input-box input:valid~label{
+    top: -5px;
+}
+/*Los inputs*/
+.input-box input{
+    width: 100%;
+    height: 100%;
+    background: transparent;
+    border: none;
+    outline: none;
+    font-size: 1em;
+    color: #CCFFFF;
+    font-weight: 600;
+    padding: 0 35px 0 5px;
+}
+
+/*Los iconos*/
+.input-box .icon{
+    position: absolute;
+    right: 8px;
+    font-size: 1.2em;
+    color: #162938;
+    line-height: 57px;
+}
+
+
+
+/******************************************/
+.remember-forgot{
+    font-size: .9em;
+    color: #CCFFFF;
+    font-weight: 500;
+    margin: -15px 0 15px;
+    display: flex;
+    justify-content: space-between;
+}
+
+.remember-forgot label input {
+    accent-color: #162938;
+    margin-right: 3px;
+}
+
+.remember-forgot a{
+    color: fuchsia;
+    text-decoration: none;
+}
+
+.remember-forgot a:hover{
+
+    text-decoration: underline;
+}
+
+
+/*****************************************/
+
+/*Boton de sumit*/
+.btn{
+    width: 100%;
+    height: 45px;
+    background: #162938;
+    border: none;
+    outline: none;
+    border-radius: 6px;
+    cursor: pointer;
+    font-size: 1em;
+    color: #CCFFFF;
+    font-weight: 500;
+}
+
+/*************************************************/
+.login-register{
+    font-size: .9em;
+    color: #162938;
+    text-align: center;
+    font-weight: 500;
+    margin: 25px 0 10px;
+}
+
+.login-register p a{
+    color: fuchsia;
+    text-decoration: none;
+    font-weight: 600;
+
+}
+
+.login-register p{
+    color: #CCFFFF;
+}
+
+.login-register p a:hover{
+    text-decoration: underline;
+}
