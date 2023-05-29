@@ -4,6 +4,17 @@
     box-sizing: border-box;
 }
 
+  /*Animación*/
+  @keyframes fade-in {
+    0%{
+      opacity: 0;
+    } 
+    100% {
+      opacity: 1;
+    } 
+  
+    }
+
 body {
     display: flex;
     align-items: center;
@@ -14,6 +25,14 @@ body {
     background-size: cover;
      /*Sin esto la otra imagen queda mejor*/
     background-position: center;
+}
+
+.Botones {
+  animation: fade-in 0.5s ease-in-out;
+}
+
+.Botones.noshow {
+  display: none; /* oculta el bloque de botones */
 }
 
 button {
@@ -92,4 +111,132 @@ button:hover span:nth-child(4) {
     top:0;
 
 }
+
+#table-container{
+    position: absolute;
+    opacity: 0;
+    transition: opacity 0.5s ease-in-out;
+    max-height: 200px;
+    overflow: auto;
+      /* Estilos del scroll */
+      scrollbar-width: thin;  
+      scrollbar-color: rgba(0, 0, 0, 0.5) rgba(255, 255, 255, 0.3);
+    
+  }
+  
+  /* Estilos para WebKit (Chrome, Safari) */
+  #table-container::-webkit-scrollbar {
+    width: 12px;
+  }
+  
+  #table-container::-webkit-scrollbar-track {
+    background: linear-gradient(#3D7EAA,#49a09d);
+  }
+  
+  #table-container::-webkit-scrollbar-thumb {
+    background-color: linear-gradient(#2BC0E4,#EAECC6);
+    border-radius: 20px;
+    border: 3px solid white;
+  }
+  
+  
+  
+  /****************** lISTA AMIGOS********************/
+
+  .tablaAmigos{
+    position: absolute;
+    max-height: 200px;
+    overflow: auto;
+      /* Estilos del scroll */
+      scrollbar-width: thin;  
+      scrollbar-color: rgba(0, 0, 0, 0.5) rgba(255, 255, 255, 0.3);
+      display: none; /* Oculta la tabla por defecto */
+    
+  }
+
+ /*Aparición de la tabla*/
+  .tablaAmigos.open {
+    display: block; /* Muestra la tabla cuando se agrega la clase 'open' */
+    animation: fade-in 0.5s ease-in-out;
+  }
+
+
+  /*Boton para quitar la tabla*/
+  .tablaAmigos .exitTabla {
+    position: absolute;
+    top: 0px;
+    /*Me lo situa a la derecha*/
+    right: 0;
+    width: 15px;
+    height: 15px;
+    font-size: 1em;
+    color:#000;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+        cursor: pointer;
+    z-index: 1;
+    cursor: pointer;
+  }
+
+  /* Estilos para WebKit (Chrome, Safari) */
+ .tablaAmigos::-webkit-scrollbar {
+    width: 12px;
+  }
+  
+  .tablaAmigos::-webkit-scrollbar-track {
+    background: linear-gradient(#3D7EAA,#49a09d);
+  }
+  
+  .tablaAmigos::-webkit-scrollbar-thumb {
+    background-color: linear-gradient(#2BC0E4,#EAECC6);
+    border-radius: 20px;
+    border: 3px solid white;
+  }
+
+  
+  .tablaAmigos table{
+    font-family: sans-serif;
+    width: 100%;
+    height: 100%;
+    border: solid 1px rgba(255, 255, 255, 0.2);
+    background: linear-gradient(#be93c5,#7bc6cc);
+    color: white;
+    /*table-layout: fixed;*/
+    border-collapse: collapse;
+    display: block;
+    overflow: scroll unset; /**************************/
+  }
+  
+  
+  thead{
+    background: rgba(174, 242, 232, 0.8);
+    color: #000;
+    font-family:'Courier New', Courier, monospace;
+  }
+  
+  th {
+    padding: 20px 15px;
+    font-weight: 700;
+    text-transform: uppercase;
+    border: none;
+  }
+  td{
+    padding: 15px;
+    border-bottom: solid 1px rgba(255, 255, 255, 0.2);
+  
+  }
+  tbody tr{
+    cursor: pointer;
+    font-family:'Times New Roman', Times, serif;
+  }
+
+ /* tbody tr:hover {
+  
+    background: rgba(128, 234, 201, 0.8);
+  }*/
+
+
+
+  
 
