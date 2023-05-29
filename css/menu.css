@@ -237,6 +237,102 @@ button:hover span:nth-child(4) {
   }*/
 
 
+/*Solicitud de amistad*/
 
-  
+.wrapper{
+  position: absolute;
+  width: 400px;
+  height: 280px;
+  background: transparent;
+  border: 2px solid rgb(255,255,255,.5);
+  border-radius: 20px;
+  /*Filtro para que se vea el contenido del formulario*/
+  backdrop-filter: blur(20px);
+  box-shadow: 0 0 30px rgb(0,0,0,.5);
+  display: block;
+  /*Centra el contenido del contenedor*/
+  justify-content: center;
+  /* */
+  align-items: center;
+  /*Para los elementos que sobresalen tengan un limite como por ejemplo el icono para cerrar*/
+  /*Tambien me sirve para ocultar o el contenido de login o el de registration*/
+  overflow: hidden;
+  display: none;
+}
 
+.wrapper .form-box {
+  width: 100%;
+  padding: 40px;
+}
+
+.form-box h2 {
+  font-size: 2em;
+  color: #350642;
+  text-align: center;
+
+}
+
+.input-box{
+  position: relative;
+  width: 100%;
+  height: 50px;
+  /*Lineas que separan los inputs*/
+  border-bottom: 2px solid #350642;
+  margin: 30px 0;
+}
+
+.input-box label{
+  position: absolute;
+  top: 50%;
+  left: 5px;
+  transform: translateY(-50%);
+  font-size: 1em;
+  color: #350642;
+  font-weight: 500;
+  pointer-events: none;
+  /*Movimineto ante cualquier transicion o modificación que se haga*/
+  transition: .5s;
+}
+
+/*Condiciones.Si estoy sobre los inputs el label va hacia arriba*/
+.input-box input:focus~label,
+.input-box input:valid~label{
+    top: -5px;
+}
+
+/*Los inputs*/
+.input-box input{
+  width: 100%;
+  height: 100%;
+  background: transparent;
+  border: none;
+  outline: none;
+  font-size: 1em;
+  color: #350642;
+  font-weight: 600;
+  padding: 0 35px 0 5px;
+}
+
+.btn{
+  position:absolute;
+  top: 120px;
+  height: 45px;
+  background: #162938;
+  border: none;
+  outline: none;
+  border-radius: 6px;
+  cursor: pointer;
+  font-size: 1em;
+  color: #CCFFFF;
+  font-weight: 500;
+}
+
+/*JS del boton de añadir amigos*/
+.wrapper.open {
+  display: block;
+  animation: fade-in 0.5s ease-in-out;
+}
+
+.Botones.close {
+  display: none;
+}

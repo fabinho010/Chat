@@ -2,6 +2,8 @@ const botones = document.querySelector('.Botones');
 const tabla = document.querySelector('.tablaAmigos');
 const exitTabla = document.querySelector('.exitTabla');
 const openTabla = document.querySelector('.openTabla');
+const wrapper = document.querySelector('.wrapper');
+const openWrapper = document.querySelector('.openWrapper');
 
 openTabla.addEventListener('click',()=> {
     tabla.classList.add('open');
@@ -18,6 +20,12 @@ exitTabla.addEventListener('click',()=>{
     botones.classList.remove('noshow');
 })
 
+openWrapper.addEventListener('click',()=>{
+    wrapper.classList.add('open');
+});
+openWrapper.addEventListener('click',()=>{
+    botones.classList.add('close');
+});
 
 
 
