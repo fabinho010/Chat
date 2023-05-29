@@ -1,0 +1,56 @@
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 100vh;
+    background: url('../assets/blacdere.jpg ') no-repeat;
+        /*Ajusta la imagen al tamaño real*/
+        background-size: cover;
+        /*Sin esto la otra imagen queda mejor*/
+       background-position: center;
+}
+.container {
+    width: 40%;
+    background: #fff;
+    margin: 0 auto;
+    padding: 20px;
+    border-radius: 12px;
+}
+.caja-chat {
+    width: 100%;
+    height: 400px;
+    background:transparent;
+    backdrop-filter: blur(20px);
+
+}
+
+.datos-chat{
+    width: 100%;
+    padding: 5px;
+    margin-bottom: 5px;
+    border-bottom: 1px solid silver;
+    font-weight: bold;
+}
+
+input[type='text']{
+    width: 100%;
+    height: 40px;
+    border: 1px solid gray;
+    border-radius: 5px;
+    cursor: pointer;
+}
+textarea{
+    width: 100%;
+    height: 40px;
+    border-radius: 5px;
+}
+
+input ,textarea {
+margin-bottom: 3px;
+}

@@ -242,14 +242,47 @@ header{
     line-height: 57px;
 }
 
+/***********************Seccion select*****************************/
+.input-select{
+    position: relative;
+    width: 100%;
+    height: 50px;
+    /*Lineas que separan los inputs*/
+    margin: 30px 0;
+}
 
+.input-select label {
+    position: absolute;
+    top: 10%;
+    left: 5px;
+    transform: translateY(-50%);
+    font-size: 1em;
+    color: #CCFFFF;
+    font-weight: 500;
+    pointer-events: none;
+}
+
+.input-select select {
+    width: 100%;
+    height: 60%;
+    background: fuchsia;
+    top: 10%;
+    border-radius: 6px;
+    color: #162938;
+    border: none;
+    outline: none;
+    font-size: 1em;
+    cursor: pointer;
+    font-weight: 600;
+    margin-top: 10%;
+}
 
 /******************************************/
 .remember-forgot{
     font-size: .9em;
     color: #CCFFFF;
     font-weight: 500;
-    margin: -15px 0 15px;
+    margin: 50px 0 15px;
     display: flex;
     justify-content: space-between;
 }
