@@ -2,10 +2,14 @@
     margin: 0;
     padding: 0;
     box-sizing: border-box;
+    font-family: Arial, Helvetica, sans-serif;
 }
 
 body {
     display: flex;
+    font:15px arial;
+    color: #222;
+    text-align:center;
     align-items: center;
     justify-content: center;
     min-height: 100vh;
@@ -15,42 +19,79 @@ body {
         /*Sin esto la otra imagen queda mejor*/
        background-position: center;
 }
-.container {
-    width: 40%;
-    background: #fff;
-    margin: 0 auto;
-    padding: 20px;
-    border-radius: 12px;
+.contenedor {
+    position: absolute;
+    width: 500px;
+    height: 500px;
+    background: linear-gradient(#2C3E50,#FD746C);
+    border: 2px solid rgb(255,255,255,.5);
+    border-radius: 20px;
+    /*Filtro para que se vea el contenido del formulario*/
+    box-shadow: 0 0 30px rgb(0,0,0,.5);
+    display: flex;
+    flex-direction: column;
+    /*Centra el contenido del contenedor*/
+    justify-content: center;
+    /* */
+    align-items: center;
 }
+
 .caja-chat {
-    width: 100%;
-    height: 400px;
-    background:transparent;
-    backdrop-filter: blur(20px);
-
+    text-align:left;
+	margin:0 auto;
+	margin-bottom:25px;
+	padding:10px;
+	background:#fff;
+	height:270px;
+	width:430px;
+	border:1px solid #ACD8F0;
+	overflow:auto;
 }
 
-.datos-chat{
-    width: 100%;
-    padding: 5px;
-    margin-bottom: 5px;
-    border-bottom: 1px solid silver;
-    font-weight: bold;
-}
-
-input[type='text']{
-    width: 100%;
-    height: 40px;
-    border: 1px solid gray;
-    border-radius: 5px;
-    cursor: pointer;
+.mensajeTexto {
+  display: flex;
+  flex-direction:row;
+  
 }
 textarea{
-    width: 100%;
+    width:340px;
     height: 40px;
-    border-radius: 5px;
+    border-radius: 40px;
+	border:1px solid #ACD8F0;
+    padding: 10px;
+    resize: none;
 }
 
-input ,textarea {
-margin-bottom: 3px;
+#enviar {
+    display: inline-block;
+    width: 70px;
+    height: 40px;
+    background: #162938;
+    border: none;
+    outline: none;
+    border-radius: 6px;
+    cursor: pointer;
+    font-size: 1em;
+    color: #CCFFFF;
+    font-weight: 500;
+    margin-left: 8px;
+}
+
+
+
+select {
+    margin: 10px;
+    background-color: white;
+    border-radius: 6px;
+    height: 30px;
+    width: 65%;
+    cursor: pointer;
+    border: none;
+    outline: none;
+    font-size: 1em;
+    color: #162938;
+    font-weight: 700;
+    font-size:large;
+    padding: 0 35px 0 5px;
+    margin-bottom:15px;
 }

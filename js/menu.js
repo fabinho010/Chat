@@ -63,3 +63,40 @@ function listaAmigos(){
     };
     http.send();
 }
+
+
+function añadirAmigo(){
+    let mail = sessionStorage.getItem('mail');
+    let session = sessionStorage.getItem('session');
+    let friend = document.getElementById('mail').value;
+
+    var http = new XMLHttpRequest();
+
+    http.open("POST","http://localhost:8080/XatLLM/Friend?mail=" + mail + "&session=" + session + "&friend=" + friend,true);
+
+    http.onload = function () {
+        if (this.readyState ==4  && this.status === 200) {
+            var response = http.responseText;
+            if(response== 1){
+                alert("Amigo añadido perfectamente");
+                window.location.href = "menu.html"
+            }else if (response == 2){
+                alert("Amigo no encontrado");
+                console.error("Usuario no esta en el sistema");
+                window.location.href = "menu.html"
+            }else if(response == 3){
+                alert("Codigo de sesion ha expirado.Se requiere el Login nuevamente.");
+                console.error("Sesion caducada.Se ha de loguear nuevamente");
+                window.location.href = "index.html"
+            }else if(response == 0){
+                alert("El servidor no responde");
+                console.error("El servidor no response");
+            }
+        }
+    }
+    http.send();
+}
+
+function irChat(){
+    window.location.href="chat.html";
+}
