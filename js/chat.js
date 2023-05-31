@@ -1,3 +1,7 @@
+ // Número máximo de conversaciones permitidas
+var maxConversaciones = 5;
+// Array para almacenar las conversaciones activas
+var converActivas = []; 
 
 var enviarBoton = document.getElementById('enviar');
 enviarBoton.addEventListener('click',function() {
@@ -11,6 +15,11 @@ mensajeTextarea.addEventListener('keydown', function(event) {
       enviarMensaje();
     }
   });*/
+
+function iniciarChat(){
+    
+}
+
 
 
 function getAmigos(){
@@ -106,3 +115,4 @@ function enviarMensaje(){
     }
     http.send();
 }
+
