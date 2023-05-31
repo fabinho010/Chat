@@ -4,13 +4,13 @@ enviarBoton.addEventListener('click',function() {
     enviarMensaje();
 });
 
-var mensajeTextarea = document.querySelector('.mensajeTexto textarea');
+/*var mensajeTextarea = document.querySelector('.mensajeTexto textarea');
 mensajeTextarea.addEventListener('keydown', function(event) {
     if (event.keyCode === 13) {
       event.preventDefault();
       enviarMensaje();
     }
-  });
+  });*/
 
 
 function getAmigos(){
@@ -66,8 +66,10 @@ function recibirMensajes() {
             // Verificar si response es un objeto
             if (typeof response === 'object') {
                 var mensaje = response;
-                var spanMensaje = document.createElement("span");
-                spanMensaje.textContent = mensaje.text;
+
+                
+                var spanMensaje = document.createElement("span"); 
+                spanMensaje.textContent =mensaje.emisor + " : " + mensaje.text;
     
                 var divMensaje = document.createElement("div");
                 divMensaje.appendChild(spanMensaje);
