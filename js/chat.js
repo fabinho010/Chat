@@ -13,7 +13,7 @@ enviarBoton.addEventListener('click',function() {
 
 var contenedor = document.querySelector(".contenedor");
 
-var chatExist = document.querySelector(".caja-chat");
+var chatExist = document.querySelector(".caja");
 
 var destinoSelect = document.getElementById("destino");
 
@@ -24,33 +24,25 @@ destinoSelect.addEventListener("change", function() {
 });
 
 
-
   function iniciarChat() {
     var destinatarioSeleccionado = destinoSelect.value;
     //Compruebo el usuario ya esta en el array de Usuarios porque si esta significa que ya tiene un chat disponible.
     var indiceUsuario = Usuarios.indexOf(destinatarioSeleccionado);
     recibirMensajes();
     if (indiceUsuario !== -1) {
-        console.info("1");
+
         mostrarChatExistente(indiceUsuario);
         recibirMensajes();
     } else if (Usuarios.length < maxConversaciones) {
-        console.info("2");
         //Creo el nuevo chat
         var cajaChat = crearCajaChat(destinatarioSeleccionado);
         //Meto el usuario en el array de usuarios a la misma vez que el cajaChat que he creado.
         Usuarios.push(destinatarioSeleccionado);
         converActivas.push(cajaChat);
-
-        console.info(Usuarios.length);
-        console.info(converActivas.length);
         //Añado el cajaChat en el Html
-        //Lo meto en el html
-        //cajaChat.style.display = 'none';
-        //chatExist.parentNode.replaceChild(cajaChat,chatExist)
-        chatExist.appendChild(cajaChat);
+       chatExist.appendChild(cajaChat);
         mostrarChatExistente(Usuarios.length - 1);
-        console.info("exito??")
+
     } else{
         console.error("Se alcanzó el máximo de chats activos");
         alert("Se alcanzó el máximo de chats disponibles");
@@ -72,11 +64,8 @@ function mostrarChatExistente(indice) {
     for (var i = 0; i < converActivas.length; i++) {
       var cajaChat = converActivas[i];
       if (i === indice) {
-        console.info("33")
-        console.info(cajaChat);
         cajaChat.style.display = 'block';
       } else {
-        console.info("33");
         cajaChat.style.display = 'none';
       }
     }
@@ -175,7 +164,6 @@ function enviarMensaje(){
     var http = new XMLHttpRequest();
 
     http.open("POST", "http://localhost:8080/XatLLM/Xat?mail=" + mail + "&session=" + session + "&receptor=" + receptor + "&sms=" + sms, true);
-
 
     
     http.onload = function() {
