@@ -18,8 +18,8 @@ var chatExist = document.querySelector(".caja-chat");
 var destinoSelect = document.getElementById("destino");
 
 destinoSelect.addEventListener("change", function() {
-    contenedor.style.display = 'block';
     iniciarChat();
+    contenedor.style.display = 'block';
     
 });
 
@@ -46,7 +46,9 @@ destinoSelect.addEventListener("change", function() {
         console.info(converActivas.length);
         //Añado el cajaChat en el Html
         //Lo meto en el html
-        contenedor.appendChild(cajaChat.style.display = 'none');
+        //cajaChat.style.display = 'none';
+        //chatExist.parentNode.replaceChild(cajaChat,chatExist)
+        chatExist.appendChild(cajaChat);
         mostrarChatExistente(Usuarios.length - 1);
         console.info("exito??")
     } else{
@@ -54,8 +56,7 @@ destinoSelect.addEventListener("change", function() {
         alert("Se alcanzó el máximo de chats disponibles");
         return;
     }
-
-    
+   
 }
 
 
@@ -71,8 +72,11 @@ function mostrarChatExistente(indice) {
     for (var i = 0; i < converActivas.length; i++) {
       var cajaChat = converActivas[i];
       if (i === indice) {
+        console.info("33")
+        console.info(cajaChat);
         cajaChat.style.display = 'block';
       } else {
+        console.info("33");
         cajaChat.style.display = 'none';
       }
     }
@@ -125,6 +129,8 @@ function recibirMensajes() {
     http.onload = function() {
         if (this.readyState == 4 && this.status == 200) {
             var response = JSON.parse(http.responseText);
+            /*----------------------*/ 
+            var  chat = converActivas[destinoSelect.value];
             var cajaChat = document.querySelector(".caja-chat");
     
             console.info(response);
