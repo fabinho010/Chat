@@ -21,6 +21,7 @@ body {
 }
 
 .contenedor {
+    display: none;
     width: 360px;
     background-color: #fff;
     border: 1px solid #ccc;
@@ -41,14 +42,54 @@ body {
     height: 380px;
     overflow-y: scroll;
     text-align: left; /* Alinear el contenido a la izquierda */
-    padding: 10px; /* Agregar un margen interno */
+    padding: 5px; /* Agregar un margen interno */
 }
 
-.message-list {
-    list-style: none;
-    margin: 0;
-    padding: 0;
-  }
+.bocadillo {
+    background: gray;
+    border-color: grey;
+    color: #fff;
+    margin: 10px;
+    margin-bottom: 5%;
+    padding: 15px;
+    position: relative;
+    border-radius: 8px 8px 8px 8px;
+    width: 200px;
+}
+.bocadillo:after {
+    content: "";
+    position: absolute;
+   top: 80%;
+   left: 5px;
+   border-top: 20px solid blue;
+   border-top-color: inherit;
+   border-left: 20px solid transparent;
+   border-right: 20px solid transparent;
+}
+
+.bocadilloEnviar {
+    background: #28B463;
+    border-color: #28B463;
+    color: #fff;
+    left: 35%;
+    margin: 10px;
+    margin-bottom: 8%;
+    padding: 15px;
+    position: relative;
+    border-radius: 8px 8px 8px 8px;
+    width: 200px;
+}
+
+.bocadilloEnviar:after {
+    content: "";
+    position: absolute;
+   top: 80%;
+   right: 5px;
+   border-top: 20px solid blue;
+   border-top-color: inherit;
+   border-left: 20px solid transparent;
+   border-right: 20px solid transparent;
+}
 
 .mensajeTexto {
     display: flex;
@@ -84,7 +125,7 @@ body {
 
 select {
     position: absolute;
-    top: 220px; /* Ajusta el valor para controlar la distancia desde la parte superior */
+    top: 140px; /* Ajusta el valor para controlar la distancia desde la parte superior */
     left: 250px; /* Ajusta el valor para controlar la distancia desde la izquierda */
     background-color: white;
     border-radius: 6px;
@@ -101,17 +142,16 @@ select {
     margin-bottom: 15px;
 }
 
-@media screen and (max-width: 768px) {
+@media screen and (max-width: 1468px) {
     .contenedor {
-        width: 90%;
+        position: static;
         max-width: 400px;
         margin-top: 20px;
     }
     
     select {
-        position: static;
+        position:static;
         width: 100%;
-        margin-top: 10px;
     }
 }
 

@@ -1,7 +1,10 @@
+
  // Número máximo de conversaciones permitidas
 var maxConversaciones = 5;
 // Array para almacenar las conversaciones activas
 var converActivas = []; 
+
+var Usuarios = [];
 
 var enviarBoton = document.getElementById('enviar');
 enviarBoton.addEventListener('click',function() {
@@ -10,80 +13,70 @@ enviarBoton.addEventListener('click',function() {
 
 var contenedor = document.querySelector(".contenedor");
 
-var cajaChat = document.querySelector(".caja-chat");
+var chatExist = document.querySelector(".caja-chat");
 
 var destinoSelect = document.getElementById("destino");
 
 destinoSelect.addEventListener("change", function() {
+    contenedor.style.display = 'block';
     iniciarChat();
+    
 });
 
-destinoSelect.addEventListener("change", function() {
-    if (destinoSelect.value !== "") {
-      contenedor.style.display = "block";
-    } else {
-      contenedor.style.display = "none";
-    }
-  });
 
-/*var mensajeTextarea = document.querySelector('.mensajeTexto textarea');
-mensajeTextarea.addEventListener('keydown', function(event) {
-    if (event.keyCode === 13) {
-      event.preventDefault();
-      enviarMensaje();
-    }
-  });*/
 
   function iniciarChat() {
     var destinatarioSeleccionado = destinoSelect.value;
-    console.info(destinatarioSeleccionado);
-
-
-    //Compruebo si ya tiene iniciado adjudicado un chat.Boolenao
-    var converExistente = converActivas.find(function(conversacion) {
-        return conversacion.usuario === destinatarioSeleccionado;
-    });
-    console.info(converExistente);
-    if (converExistente) {
-        mostrarChatExistente(converActivas[destinatarioSeleccionado].cajaChat);
-        return;
-    } else if (converActivas.length < maxConversaciones) {
-
+    //Compruebo el usuario ya esta en el array de Usuarios porque si esta significa que ya tiene un chat disponible.
+    var indiceUsuario = Usuarios.indexOf(destinatarioSeleccionado);
+    recibirMensajes();
+    if (indiceUsuario !== -1) {
+        console.info("1");
+        mostrarChatExistente(indiceUsuario);
+        recibirMensajes();
+    } else if (Usuarios.length < maxConversaciones) {
+        console.info("2");
         //Creo el nuevo chat
-        divChat = document.createElement("div");
-        //Inner para que este sea el nuevo caja-chat
-        cajaChat.innerHTML = divChat;
-        // Añade la conversación en el array de chats activos
-        converActivas.push({ usuario: destinatarioSeleccionado, cajaChat: divChat });
+        var cajaChat = crearCajaChat(destinatarioSeleccionado);
+        //Meto el usuario en el array de usuarios a la misma vez que el cajaChat que he creado.
+        Usuarios.push(destinatarioSeleccionado);
+        converActivas.push(cajaChat);
 
+        console.info(Usuarios.length);
+        console.info(converActivas.length);
+        //Añado el cajaChat en el Html
+        //Lo meto en el html
+        contenedor.appendChild(cajaChat.style.display = 'none');
+        mostrarChatExistente(Usuarios.length - 1);
+        console.info("exito??")
     } else{
         console.error("Se alcanzó el máximo de chats activos");
         alert("Se alcanzó el máximo de chats disponibles");
         return;
     }
 
+    
 }
 
 
-function mostrarChatExistente(chat){
-    cajaChat.replaceChildren(chat);
-    //cajaChat.innerHTML = chat;
-    //cajaChat.innerHTML = ""; // Limpia el contenido existente de cajaChat
-    //cajaChat.appendChild(chat); // Agrega el elemento chat como hijo de cajaChat
+function crearCajaChat(User){
+    var cajaChat = document.createElement('div');
+    //La clase tiene que ser el mismo que la del html
+    cajaChat.className = 'caja-chat';
+    cajaChat.id = "chat-"+ User;
+    return cajaChat;
 }
 
-
-
-//Encaso de que no funcione lo de arriba
-/* Crea el nuevo elemento que deseas introducir
-var nuevoElemento = document.createElement("div");
-nuevoElemento.textContent = "Nuevo elemento";
-
-// Obtén el elemento existente que deseas reemplazar
-var elementoExistente = document.getElementById("elemento-a-reemplazar");
-
-// Reemplaza el elemento existente con el nuevo elemento
-elementoExistente.replaceWith(nuevoElemento);*/
+function mostrarChatExistente(indice) {
+    for (var i = 0; i < converActivas.length; i++) {
+      var cajaChat = converActivas[i];
+      if (i === indice) {
+        cajaChat.style.display = 'block';
+      } else {
+        cajaChat.style.display = 'none';
+      }
+    }
+  }
 
 
 function getAmigos(){
@@ -140,15 +133,20 @@ function recibirMensajes() {
             if (typeof response === 'object') {
                 var mensaje = response;
 
-                
                 var spanMensaje = document.createElement("span"); 
-                spanMensaje.textContent =mensaje.emisor + " : " + mensaje.text;
+                spanMensaje.textContent = mensaje.text;
     
                 var divMensaje = document.createElement("div");
+                divMensaje.classList.add("bocadillo");
                 divMensaje.appendChild(spanMensaje);
-    
+
                 // Agregar el mensaje al final de la caja de chat
                 cajaChat.appendChild(divMensaje);
+
+                // Desplazar el scroll hacia abajo
+                cajaChat.scrollTop = cajaChat.scrollHeight;
+
+                recibirMensajes();
             } else {
                 console.error("La respuesta no es un objeto válido");
             }
@@ -158,9 +156,9 @@ function recibirMensajes() {
     http.send();
 }
 
-//recibirMensajes();
+//
 // Llama a la función recibirMensajes() cada 5 segundos
-setInterval(recibirMensajes, 5000);
+//setInterval(recibirMensajes, 5000);
 
 function enviarMensaje(){
     var mail = sessionStorage.getItem('mail');
@@ -171,12 +169,30 @@ function enviarMensaje(){
     var http = new XMLHttpRequest();
 
     http.open("POST", "http://localhost:8080/XatLLM/Xat?mail=" + mail + "&session=" + session + "&receptor=" + receptor + "&sms=" + sms, true);
+
+
     
     http.onload = function() {
         if (this.readyState == 4 && this.status == 200) {
             document.getElementById('mensaje').value = "";
+
+            //Llevo el mesaje al chat
+            var cajaChat = document.querySelector(".caja-chat");
+            var spanMensaje = document.createElement("span"); 
+            spanMensaje.textContent = sms;
+        
+            var divMensaje = document.createElement("div");
+            divMensaje.classList.add("bocadilloEnviar");
+            divMensaje.appendChild(spanMensaje);
+            // Agregar el mensaje al final de la caja de chat
+            cajaChat.appendChild(divMensaje);
+
+            // Desplazar el scroll hacia abajo
+            cajaChat.scrollTop = cajaChat.scrollHeight;
+
         }
     }
     http.send();
 }
+
 
