@@ -25,24 +25,24 @@ destinoSelect.addEventListener("change", function() {
 
 
   function iniciarChat() {
+    var emisorMensaje = sessionStorage.getItem('mail');
     var destinatarioSeleccionado = destinoSelect.value;
     //Compruebo el usuario ya esta en el array de Usuarios porque si esta significa que ya tiene un chat disponible.
     var indiceUsuario = Usuarios.indexOf(destinatarioSeleccionado);
-    recibirMensajes();
     if (indiceUsuario !== -1) {
-
         mostrarChatExistente(indiceUsuario);
-        recibirMensajes();
+        recibirMensajes(emisorMensaje,destinatarioSeleccionado);
     } else if (Usuarios.length < maxConversaciones) {
         //Creo el nuevo chat
         var cajaChat = crearCajaChat(destinatarioSeleccionado);
+        cajaChat.id = 'caja-' + destinatarioSeleccionado;
         //Meto el usuario en el array de usuarios a la misma vez que el cajaChat que he creado.
         Usuarios.push(destinatarioSeleccionado);
         converActivas.push(cajaChat);
         //Añado el cajaChat en el Html
        chatExist.appendChild(cajaChat);
         mostrarChatExistente(Usuarios.length - 1);
-
+        recibirMensajes(emisorMensaje,destinatarioSeleccionado);
     } else{
         console.error("Se alcanzó el máximo de chats activos");
         alert("Se alcanzó el máximo de chats disponibles");
@@ -56,7 +56,7 @@ function crearCajaChat(User){
     var cajaChat = document.createElement('div');
     //La clase tiene que ser el mismo que la del html
     cajaChat.className = 'caja-chat';
-    cajaChat.id = "chat-"+ User;
+    cajaChat.id = User;
     return cajaChat;
 }
 
@@ -108,40 +108,36 @@ getAmigos();
 
 
 
-function recibirMensajes() {
+function recibirMensajes(emisor,destino) {
     var mail = sessionStorage.getItem('mail');
     var session = sessionStorage.getItem('session');
-
+    var cajaChatExistente = document.getElementById('caja-' + destino);
     var http = new XMLHttpRequest();
 
     http.open("GET", "http://localhost:8080/XatLLM/Xat?mail=" + mail + "&session=" + session, true);
     http.onload = function() {
         if (this.readyState == 4 && this.status == 200) {
             var response = JSON.parse(http.responseText);
-            /*----------------------*/ 
-            var  chat = converActivas[destinoSelect.value];
-            var cajaChat = document.querySelector(".caja-chat");
-    
-            console.info(response);
-    
             // Verificar si response es un objeto
             if (typeof response === 'object') {
                 var mensaje = response;
-
-                var spanMensaje = document.createElement("span"); 
-                spanMensaje.textContent = mensaje.text;
+                if((cajaChatExistente.id === "caja-"+ mensaje.emisor) && (mensaje.receptor === mail)) {
+                    var spanMensaje = document.createElement("span"); 
+                    spanMensaje.textContent = mensaje.text;
+        
+                    var divMensaje = document.createElement("div");
+                    divMensaje.classList.add("bocadillo");
+                    divMensaje.appendChild(spanMensaje);
     
-                var divMensaje = document.createElement("div");
-                divMensaje.classList.add("bocadillo");
-                divMensaje.appendChild(spanMensaje);
+                    // Agregar el mensaje al final de la caja de chat
+                    cajaChatExistente.appendChild(divMensaje);
+    
+                    // Desplazar el scroll hacia abajo
+                    cajaChatExistente.scrollTop = cajaChatExistente.scrollHeight;
 
-                // Agregar el mensaje al final de la caja de chat
-                cajaChat.appendChild(divMensaje);
+                    recibirMensajes(emisor,destino);
+                }
 
-                // Desplazar el scroll hacia abajo
-                cajaChat.scrollTop = cajaChat.scrollHeight;
-
-                recibirMensajes();
             } else {
                 console.error("La respuesta no es un objeto válido");
             }
@@ -160,6 +156,7 @@ function enviarMensaje(){
     var session = sessionStorage.getItem('session');
     var receptor = document.getElementById('destino').value;
     var sms = document.getElementById('mensaje').value;
+    var cajaChatExistente = document.getElementById('caja-' + receptor);
     
     var http = new XMLHttpRequest();
 
@@ -169,21 +166,19 @@ function enviarMensaje(){
     http.onload = function() {
         if (this.readyState == 4 && this.status == 200) {
             document.getElementById('mensaje').value = "";
-
-            //Llevo el mesaje al chat
-            var cajaChat = document.querySelector(".caja-chat");
-            var spanMensaje = document.createElement("span"); 
-            spanMensaje.textContent = sms;
-        
-            var divMensaje = document.createElement("div");
-            divMensaje.classList.add("bocadilloEnviar");
-            divMensaje.appendChild(spanMensaje);
-            // Agregar el mensaje al final de la caja de chat
-            cajaChat.appendChild(divMensaje);
-
-            // Desplazar el scroll hacia abajo
-            cajaChat.scrollTop = cajaChat.scrollHeight;
-
+            if(cajaChatExistente.id === "caja-"+ receptor){
+             //Llevo el mesaje al chat
+             var spanMensaje = document.createElement("span"); 
+             spanMensaje.textContent = sms;
+ 
+             var divMensaje = document.createElement("div");
+             divMensaje.classList.add("bocadilloEnviar");
+             divMensaje.appendChild(spanMensaje);
+             // Agregar el mensaje al final de la caja de chat
+             cajaChatExistente.appendChild(divMensaje);
+             // Desplazar el scroll hacia abajo
+             cajaChatExistente.scrollTop = cajaChatExistente.scrollHeight;
+            }
         }
     }
     http.send();
