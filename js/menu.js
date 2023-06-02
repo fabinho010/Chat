@@ -100,3 +100,9 @@ function añadirAmigo(){
 function irChat(){
     window.location.href="chat.html";
 }
+
+function logOut(){
+    sessionStorage.removeItem('mail');
+    sessionStorage.removeItem('session');
+    window.location.href="/../index.html";
+}

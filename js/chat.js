@@ -31,7 +31,6 @@ destinoSelect.addEventListener("change", function() {
     var indiceUsuario = Usuarios.indexOf(destinatarioSeleccionado);
     if (indiceUsuario !== -1) {
         mostrarChatExistente(indiceUsuario);
-        recibirMensajes(emisorMensaje,destinatarioSeleccionado);
     } else if (Usuarios.length < maxConversaciones) {
         //Creo el nuevo chat
         var cajaChat = crearCajaChat(destinatarioSeleccionado);
@@ -42,7 +41,6 @@ destinoSelect.addEventListener("change", function() {
         //Añado el cajaChat en el Html
        chatExist.appendChild(cajaChat);
         mostrarChatExistente(Usuarios.length - 1);
-        recibirMensajes(emisorMensaje,destinatarioSeleccionado);
     } else{
         console.error("Se alcanzó el máximo de chats activos");
         alert("Se alcanzó el máximo de chats disponibles");
@@ -65,6 +63,7 @@ function mostrarChatExistente(indice) {
       var cajaChat = converActivas[i];
       if (i === indice) {
         cajaChat.style.display = 'block';
+        recibirMensajes();
       } else {
         cajaChat.style.display = 'none';
       }
@@ -108,10 +107,10 @@ getAmigos();
 
 
 
-function recibirMensajes(emisor,destino) {
+function recibirMensajes() {
     var mail = sessionStorage.getItem('mail');
-    var session = sessionStorage.getItem('session');
-    var cajaChatExistente = document.getElementById('caja-' + destino);
+    var session = sessionStorage.getItem('session');    
+    var cajaChatExistente = document.querySelector(".caja-chat");
     var http = new XMLHttpRequest();
 
     http.open("GET", "http://localhost:8080/XatLLM/Xat?mail=" + mail + "&session=" + session, true);
@@ -134,8 +133,7 @@ function recibirMensajes(emisor,destino) {
     
                     // Desplazar el scroll hacia abajo
                     cajaChatExistente.scrollTop = cajaChatExistente.scrollHeight;
-
-                    recibirMensajes(emisor,destino);
+                    recibirMensajes();
                 }
 
             } else {
