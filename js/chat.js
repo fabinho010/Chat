@@ -203,22 +203,19 @@ function agregarContacto() {
         contacto.className = 'contactoBloque';
         contacto.id = opcionSeleccionada;
         contacto.innerText = opcionSeleccionada;
-        //contacto.onclick = function() {
-           // enseñarChat();
-          //};
+        contacto.onclick = function() {
+            enseñarChat(contacto.id);
+          };
         contactos.appendChild(contacto)
-        opcionSeleccionada = ''; // Reiniciar el select después de agregar el contacto
+         // Reiniciar el select después de agregar el contacto
         }
   }
 
-  /*Funcion que muestra los chats desde el panel de contactos
-  function enseñarChat(){
-    var contactoBloque = document.querySelector(".contactoBloque");
-    console.log(contactoBloque.id);
-    //obtengo la el correo para verificar que el usuario esta en el array para asi obtener su chat
-    var indexContacto = Usuarios.indexOf(contactoBloque.id);
-    mostrarChatExistente(indexContacto);
-    recibirMensajes();
-  }*/
+  /*Funcion que muestra los chats desde el panel de contactos*/
+  function enseñarChat(id){
+    //Cambio la opcion del select a la que esta apuntando,para poder ejecutar la funcion iniciarChat();
+    destinoSelect.value = id;
+    iniciarChat();
+  }
 
 

@@ -190,28 +190,46 @@ select {
 
 
 
+/*Responsivee*/
   
   @media screen and (max-width: 1200px) {
     aside {
         width: 30%;
-      padding: 5%; /* Aumentar el espacio interno en pantallas grandes */
+      padding: 5%; 
     }
 
     select {
         top: 1;
         width: 25%;
     }
+
+    .contactoBloque {
+        font-size: medium;
+    }
     
     main {
-      padding: 5%; /* Aumentar el espacio interno en pantallas grandes */
+      padding: 5%;
     }
     
     .contenedor {
-      width: 400px; /* Ajustar el ancho del contenedor en pantallas grandes */
+      width: 400px; 
     }
   }
   
+  @media screen and (max-width: 620px) {
+    aside {
+        display:none;
+    }
 
+    select {
+        top: 1;
+        width: 30%;
+    }
+    
+    .contenedor {
+      width: 500px; 
+    }
+  }
 
 
 
