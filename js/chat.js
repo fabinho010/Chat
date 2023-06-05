@@ -3,7 +3,7 @@
 var maxConversaciones = 5;
 // Array para almacenar las conversaciones activas
 var converActivas = []; 
-
+//Array para almacenar los usuarios
 var Usuarios = [];
 
 var enviarBoton = document.getElementById('enviar');
@@ -23,6 +23,9 @@ destinoSelect.addEventListener("change", function() {
 var contactos = document.querySelector(".contactos");
 
 
+// Función que se llama cuando se selecciona un destinatario del chat. 
+//Comprueba si el usuario ya tiene un chat activo o si se puede crear un nuevo chat. 
+//Crea una nueva caja de chat si es posible y la agrega al HTML.
   function iniciarChat() {
     var destinatarioSeleccionado = destinoSelect.value;
     //Compruebo el usuario ya esta en el array de Usuarios porque si esta significa que ya tiene un chat disponible.
@@ -50,7 +53,7 @@ var contactos = document.querySelector(".contactos");
    
 }
 
-
+// Función auxiliar que crea y devuelve un elemento div para la caja de chat con el destinatario especificado.
 function crearCajaChat(User){
     var cajaChat = document.createElement('div');
     //La clase tiene que ser el mismo que la del html
@@ -59,6 +62,7 @@ function crearCajaChat(User){
     return cajaChat;
 }
 
+// Función que muestra la caja de chat correspondiente
 function mostrarChatExistente(indice) {
     for (var i = 0; i < converActivas.length; i++) {
       var cajaChat = converActivas[i];
@@ -73,6 +77,7 @@ function mostrarChatExistente(indice) {
   }
 
 
+  //Función que realiza una solicitud GET al servicio backend para obtener la lista de amigos de un usuario.
 function getAmigos(){
     let mail = sessionStorage.getItem('mail');
     let session = sessionStorage.getItem('session');
@@ -108,6 +113,9 @@ http.send();
 getAmigos();
 
 
+
+//Función que realiza una solicitud GET al servicio backend para recibir un mensaje pendiente. 
+//Si hay un mensaje válido, lo muestra en la caja de chat correspondiente.
 
 function recibirMensajes() {
     var mail = sessionStorage.getItem('mail');
@@ -150,10 +158,10 @@ function recibirMensajes() {
     http.send();
 }
 
-//
-// Llama a la función recibirMensajes() cada 5 segundos
-//setInterval(recibirMensajes, 1000);
 
+
+//Función que se llama cuando se envía un mensaje. Obtiene los datos necesarios del formulario y realiza una solicitud POST
+// al servicio backend para enviar el mensaje.
 function enviarMensaje(){
     var mail = sessionStorage.getItem('mail');
     var session = sessionStorage.getItem('session');
@@ -191,7 +199,8 @@ function enviarMensaje(){
 }
 
 
-// Funciona para agregar contactos
+// Funciona para agregar contactos.Crea un elemento de contacto en el HTML y asigna un manejador de eventos 
+//para mostrar el chat correspondiente cuando se hace clic en el contacto.
 function agregarContacto() {
         
         var opcionSeleccionada = destinoSelect.value;
@@ -211,7 +220,10 @@ function agregarContacto() {
         }
   }
 
-  /*Funcion que muestra los chats desde el panel de contactos*/
+
+
+  // Función que se llama cuando se selecciona un chat desde el panel de contactos. 
+  //Cambia la opción seleccionada en el select de destinatarios y llama a la función iniciarChat().
   function enseñarChat(id){
     //Cambio la opcion del select a la que esta apuntando,para poder ejecutar la funcion iniciarChat();
     destinoSelect.value = id;

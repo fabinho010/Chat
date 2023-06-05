@@ -20,6 +20,10 @@ iconeClose.addEventListener('click', ()=> {
     wrapper.classList.remove('active-popup');
 });
 
+
+// Función que se llama cuando se realiza un intento de inicio de sesión. 
+//Obtiene los valores de los campos de correo electrónico y contraseña del formulario y realiza una solicitud GET 
+//al servicio backend para verificar las credenciales. Si las credenciales son válidas, almacena el correo electrónico y la sesión en el sessionStorage y redirige al usuario a la página de menú.
 function login() {
     var email = document.getElementById("mail").value;
     let password = document.getElementById("pass").value;
@@ -42,6 +46,8 @@ function login() {
     http.send();
 }
 
+//  Función que realiza una solicitud GET al servicio backend para obtener la lista de países disponibles. 
+//Luego, actualiza un elemento de selección en el HTML con los países obtenido
 function getPaises(){
     let http = new XMLHttpRequest();
     http.open("GET","http://localhost:8080/XatLLM/Register",true);
@@ -74,6 +80,10 @@ http.send();
 }
 getPaises();
 
+
+// Función que se llama cuando se intenta registrar un nuevo usuario. 
+//Obtiene los valores de los campos de nombre de usuario, contraseña, correo electrónico y país del formulario
+// y realiza una solicitud POST al servicio backend para registrar al usuario.
 function register(){
     let username = document.getElementById("username").value;
     let password = document.getElementById("contra").value;
