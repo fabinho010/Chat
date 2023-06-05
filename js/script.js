@@ -35,7 +35,8 @@ function login() {
         if (http.readyState == 4 && http.status == 200) {
             var response = http.responseText;
             if (response === "false") {
-                throw new Error("Credenciales inválidas");
+                alert("Credenciales invalidas");
+                console.error("Credenciales invalidas");
             } else {
                 sessionStorage.setItem("mail", email);
                 sessionStorage.setItem("session", response);
@@ -101,7 +102,7 @@ function register(){
                 alert("Usuario registrado");
                 location.href = "index.html";
             } else{
-                alert("Error de creedenciales.Revisew los datos introducidos.");
+                alert("Error de creedenciales.Revise los datos introducidos.");
                 console.error("Error credenciales",http.status);
             }
         } else{

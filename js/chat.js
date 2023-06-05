@@ -13,6 +13,7 @@ var contenedor = document.querySelector(".contenedor");
 var chatExist = document.querySelector(".caja");
 
 var destinoSelect = document.getElementById("destino");
+ 
 
 destinoSelect.addEventListener("change", function() {
     agregarContacto();
@@ -230,4 +231,7 @@ function agregarContacto() {
     iniciarChat();
   }
 
-
+  //Funcion que se llama cuando el usaurio pulsa el boton de menu.
+ function irMenu(){
+    window.location.href = "menu.html";
+ }

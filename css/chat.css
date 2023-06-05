@@ -189,6 +189,32 @@ select {
 }
 
 
+.icon.menu{
+    display: flex;
+    position: absolute;
+    top: 100px;
+    right: 100px;
+ }
+ .ones{
+     background: black;
+     cursor: pointer;
+     border: none;
+     padding: 16px 32px;
+     color: #fff;
+     font-size: 24px;
+     font-weight: bold;
+     position:relative;
+     border-radius: 12px;
+ }
+
+ .icon.menu:hover .ones{
+
+    background: #A9CCE3;
+    color: #000;
+    transform: scale(1.25);
+ }
+ 
+
 
 /*Responsivee*/
   
@@ -217,18 +243,20 @@ select {
   }
   
   @media screen and (max-width: 620px) {
-    aside {
-        display:none;
-    }
 
     select {
-        top: 1;
-        width: 30%;
+        display: none;
     }
     
     .contenedor {
       width: 500px; 
     }
+
+    .icon.menu {
+        display: none;
+    }
+
+    
   }
 
 

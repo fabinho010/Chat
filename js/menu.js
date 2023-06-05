@@ -66,8 +66,10 @@ function listaAmigos(){
     http.send();
 }
 
+
 // Función que se llama cuando se intenta añadir un amigo. Obtiene los datos necesarios del formulario
 // y realiza una solicitud POST al servicio backend para agregar al amigo.
+
 function añadirAmigo(){
     let mail = sessionStorage.getItem('mail');
     let session = sessionStorage.getItem('session');
@@ -100,10 +102,12 @@ function añadirAmigo(){
     http.send();
 }
 
+
 // Función que redirige al usuario a la página de chat.
 function irChat(){
     window.location.href="chat.html";
 }
+
 
 // Función que se llama cuando se desea cerrar sesión. 
 //Elimina los datos de sesión almacenados en el sessionStorage y redirige al usuario a la página de inicio de sesión.
