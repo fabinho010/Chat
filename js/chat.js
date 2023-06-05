@@ -15,8 +15,8 @@ var chatExist = document.querySelector(".caja");
 var destinoSelect = document.getElementById("destino");
 
 destinoSelect.addEventListener("change", function() {
-    iniciarChat();
     agregarContacto();
+    iniciarChat();
     contenedor.style.display = 'block';
 });
 
@@ -191,24 +191,34 @@ function enviarMensaje(){
 }
 
 
+// Funciona para agregar contactos
 function agregarContacto() {
-
-    var opcionSeleccionada = destinoSelect.value;
- if (opcionSeleccionada !== '' && Usuarios.length < maxConversaciones){
-      var contacto = document.createElement('div');
-      contacto.className = 'contactoBloque';
-      contacto.id = opcionSeleccionada;
-      contacto.innerText = opcionSeleccionada;
-      contactos.appendChild(contacto)
-      opcionSeleccionada = ''; // Reiniciar el select después de agregar el contacto
-    }
+        
+        var opcionSeleccionada = destinoSelect.value;
+        var indexSel = Usuarios.indexOf(opcionSeleccionada);
+        //Si en el select no es vacio , ni se ha llegado al cupo de usuario y no sea creeado el contacto
+    if(opcionSeleccionada !== '' && Usuarios.length < maxConversaciones && (indexSel === -1)){
+        //Creo el contacto
+        var contacto = document.createElement('div');
+        contacto.className = 'contactoBloque';
+        contacto.id = opcionSeleccionada;
+        contacto.innerText = opcionSeleccionada;
+        //contacto.onclick = function() {
+           // enseñarChat();
+          //};
+        contactos.appendChild(contacto)
+        opcionSeleccionada = ''; // Reiniciar el select después de agregar el contacto
+        }
   }
 
-
-function enseñarChatContacto(){
+  /*Funcion que muestra los chats desde el panel de contactos
+  function enseñarChat(){
     var contactoBloque = document.querySelector(".contactoBloque");
-    console.info(contactoBloque);
-    console.info(contactoBloque.id);
-    var indexUsuario = Usuarios.indexOf(contactoBloque.id);
-    mostrarChatExistente(indexUsuario);
-}
+    console.log(contactoBloque.id);
+    //obtengo la el correo para verificar que el usuario esta en el array para asi obtener su chat
+    var indexContacto = Usuarios.indexOf(contactoBloque.id);
+    mostrarChatExistente(indexContacto);
+    recibirMensajes();
+  }*/
+
+
