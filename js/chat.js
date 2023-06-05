@@ -16,8 +16,11 @@ var destinoSelect = document.getElementById("destino");
 
 destinoSelect.addEventListener("change", function() {
     iniciarChat();
+    agregarContacto();
     contenedor.style.display = 'block';
 });
+
+var contactos = document.querySelector(".contactos");
 
 
   function iniciarChat() {
@@ -188,3 +191,24 @@ function enviarMensaje(){
 }
 
 
+function agregarContacto() {
+
+    var opcionSeleccionada = destinoSelect.value;
+ if (opcionSeleccionada !== '' && Usuarios.length < maxConversaciones){
+      var contacto = document.createElement('div');
+      contacto.className = 'contactoBloque';
+      contacto.id = opcionSeleccionada;
+      contacto.innerText = opcionSeleccionada;
+      contactos.appendChild(contacto)
+      opcionSeleccionada = ''; // Reiniciar el select después de agregar el contacto
+    }
+  }
+
+
+function enseñarChatContacto(){
+    var contactoBloque = document.querySelector(".contactoBloque");
+    console.info(contactoBloque);
+    console.info(contactoBloque.id);
+    var indexUsuario = Usuarios.indexOf(contactoBloque.id);
+    mostrarChatExistente(indexUsuario);
+}

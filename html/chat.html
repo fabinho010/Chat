@@ -10,20 +10,28 @@
     <script src="https://kit.fontawesome.com/d577c03405.js" crossorigin="anonymous"></script>
 </head>
 <body >
-
-    <div class="destinatario">
-        <select id="destino" name="destino"  required>
-        </select>
-    </div>
-    <div class="contenedor">
-        <div class="chat-header">Chat</div>
-          <div class="caja">
-          </div>
-          <div class="mensajeTexto">
-              <input type="text" name="mensaje" id="mensaje" class="mensaje-input" placeholder="Ingresa tu mensaje">
-              <button type="submit" class="enviarBoton" name="enviar" id="enviar" onclick="enviarMensaje()" ><i class="fa-solid fa-paper-plane"></i></button>
-          </div>
-    </div>
+    <aside>
+        <div class="tituloAs">
+        <h2>Contactos</h2>   
+        </div>
+        <div class="contactos" onclick="enseñarChatContacto()"> 
+        </div>
+    </aside>
+    <main>
+        <div class="destinatario">
+            <select id="destino" name="destino"  required>
+            </select>
+        </div>
+        <div class="contenedor">
+            <div class="chat-header">Chat</div>
+            <div class="caja">
+            </div>
+            <div class="mensajeTexto">
+                <input type="text" name="mensaje" id="mensaje" class="mensaje-input" placeholder="Ingresa tu mensaje">
+                <button type="submit" class="enviarBoton" name="enviar" id="enviar" onclick="enviarMensaje()" ><i class="fa-solid fa-paper-plane"></i></button>
+            </div>
+        </div>
+    </main>
 <script src="/js/chat.js"></script>
 </body>
 </html>

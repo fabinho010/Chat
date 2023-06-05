@@ -7,17 +7,60 @@
 
 body {
     display: flex;
+
+}
+
+aside {
+    width: 20%;
+    background-color: #7FB3D5;
+    padding: 3%;
+    color: whitesmoke;
+}
+
+.tituloAs{
+    display:flex;
+    color: #000;
+    align-items: center;
+    text-align: center;
+    justify-content: center;
+    border-bottom: 2px black solid;
+    padding-bottom: 15px;
+}
+
+.contactoBloque {
+    display: flex;
+    align-items: center;
+    text-align: center;
+    justify-content: center;
+    font-size: large;
+    border-bottom: 2px white solid;
+    margin-top: 10%;
+    padding: 20px;
+    cursor: pointer;
+}
+
+.contactoBloque:hover {
+    color: #154360;
+    background: #A9CCE3;
+    transform: scale(1.10); /* Aumenta el tamaño en un 5% */
+}
+
+
+main {
+    width: 80%;
     font:15px arial;
     color: #222;
+    display: flex;
     text-align:center;
     align-items: center;
     justify-content: center;
     min-height: 100vh;
     background: url('../assets/blacdere.jpg ') no-repeat;
-        /*Ajusta la imagen al tamaño real*/
-        background-size: cover;
-        /*Sin esto la otra imagen queda mejor*/
-       background-position: center;
+    /*Ajusta la imagen al tamaño real*/
+    background-size: cover;
+    /*Sin esto la otra imagen queda mejor*/
+   background-position: center;
+   position: relative; /* Añadido para posicionar el select */
 }
 
 .contenedor {
@@ -27,6 +70,9 @@ body {
     border: 1px solid #ccc;
     border-radius: 5px;
     box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.1);
+    align-items: center;
+    text-align: center;
+    justify-content: center;
 }
 
 .chat-header {
@@ -125,8 +171,8 @@ body {
 
 select {
     position: absolute;
-    top: 140px; /* Ajusta el valor para controlar la distancia desde la parte superior */
-    left: 250px; /* Ajusta el valor para controlar la distancia desde la izquierda */
+    top: 10%;/* Ajusta el valor para controlar la distancia desde la parte superior */
+    left: 3%; /* Ajusta el valor para controlar la distancia desde la izquierda */
     background-color: white;
     border-radius: 6px;
     height: 30px;
@@ -142,20 +188,29 @@ select {
     margin-bottom: 15px;
 }
 
-@media screen and (max-width: 1468px) {
-    .contenedor {
-        position: static;
-        max-width: 400px;
-        margin-top: 20px;
+
+
+  
+  @media screen and (max-width: 1200px) {
+    aside {
+        width: 30%;
+      padding: 5%; /* Aumentar el espacio interno en pantallas grandes */
+    }
+
+    select {
+        top: 1;
+        width: 25%;
     }
     
-    select {
-        position:static;
-        width: 100%;
+    main {
+      padding: 5%; /* Aumentar el espacio interno en pantallas grandes */
     }
-}
-
-
+    
+    .contenedor {
+      width: 400px; /* Ajustar el ancho del contenedor en pantallas grandes */
+    }
+  }
+  
 
 
 
